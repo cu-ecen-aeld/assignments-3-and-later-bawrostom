@@ -31,6 +31,10 @@ echo "Writing ${NUMFILES} files containing string ${WRITESTR} to ${WRITEDIR}"
 
 rm -rf "${WRITEDIR}"
 
+mkdir -p ${WRITEDIR}
+
+#rm -rf "${WRITEDIR}"
+
 # create $WRITEDIR if not assignment1
 assignment=`cat ../conf/assignment.txt`
 
@@ -58,7 +62,7 @@ do
 done
 
 OUTPUTSTRING=$(./finder.sh "$WRITEDIR" "$WRITESTR")
-
+echo "THE output string is: " $OUTPUTSTRING
 # remove temporary directories
 rm -rf /tmp/aeld-data
 
