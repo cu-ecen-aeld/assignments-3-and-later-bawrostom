@@ -10,9 +10,6 @@ WRITESTR=AELD_IS_FUN
 WRITEDIR=/tmp/aeld-data
 username=$(cat conf/username.txt)
 
-if [ -f  writer ];then
-	rm writer
-fi
 
 if [ $# -lt 3 ]
 then
@@ -58,7 +55,7 @@ then
 fi
 echo "Removing the old writer utility and compiling as a native application"
 make clean
-make native
+make
 
 for i in $( seq 1 $NUMFILES)
 do
