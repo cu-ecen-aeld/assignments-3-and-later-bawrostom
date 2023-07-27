@@ -1,6 +1,6 @@
 
 
-CC= /home/rostom/Downloads/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc
+CC= aarch64-none-linux-gnu-gcc
 
 
 
