@@ -1,3 +1,4 @@
+
 name: assignment-test
 on: 
     push:
@@ -23,4 +24,5 @@ jobs:
           - name: Checkout submodules
             run : git submodule update --init --recursive
           - name: Run full test
+            run: export PATH=$PATH:/home/rostom/Downloads/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu/bin/
             run: ./full-test.sh
