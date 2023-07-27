@@ -1,6 +1,9 @@
 
 
-CC= aarch64-none-linux-gnu-gcc
+CC= /home/rostom/Downloads/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc
+
+
+
 
 
 
@@ -9,7 +12,7 @@ TARGET = writer
 #LDFLAGS = -I/usr/aarch64-linux-gnu/include/syslog.h
 
 #INCLUDE_PATH = /usr/aarch64-linux-gnu/include/syslog.h
-INCLUDE_PATH := /usr/aarch64-linux-gnu/include
+INCLUDE_PATH = /usr/aarch64-linux-gnu/include
 # Specify the library path and library name
 #LIBRARY_PATH = /usr/aarch64-linux-gnu/lib
 #LIBS = -lsyslog
@@ -18,9 +21,7 @@ native: $(TARGET)
 	gcc $(SRC) -o $(TARGET)
 
 cross_compile: $(TARGET)
-
-
-$(TARGET): $(SRC) 
+#$(TARGET): $(SRC) 
 	$(CC) $(SRC) -I$(INCLUDE_PATH)  -o $(TARGET)
 
 clean:
