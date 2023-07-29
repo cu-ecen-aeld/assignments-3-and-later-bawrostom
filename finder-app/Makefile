@@ -1,18 +1,23 @@
-
-
-CC= aarch64-none-linux-gnu-gcc
-
-
-SRC= writer.c
+SRC := writer.c
 TARGET = writer
+OBJS := $(SRC:.c=.o)
 
 
+CROSS_COMPILE ?= native
 
-native: $(TARGET)
-	gcc $(SRC) -o $(TARGET)
+all: $(TARGET)
 
-cross_compile: $(TARGET)
-	$(CC) $(SRC) -o $(TARGET)
+$(TARGET) : $(OBJS)
+
+ifeq ($(CROSS_COMPILE), native)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(TARGET) $(LDFLAGS)
+endif
+
+ifeq ($(CROSS_COMPILE), aarch64-none-linux-gnu-)
+	aarch64-none-linux-gnu-gcc -g -Wall -c -o $(OBJS) $(SRC)
+	aarch64-none-linux-gnu-gcc -g -Wall -I/ $(OBJS) -o  $(TARGET)
+endif
+
+
 clean:
-	rm -f $(TARGET)
-
+	-rm -f *.o $(TARGET)
