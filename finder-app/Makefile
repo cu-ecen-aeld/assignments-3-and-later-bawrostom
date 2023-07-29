@@ -8,7 +8,7 @@ TARGET = writer
 
 
 
-default: $(TARGET)
+native: $(TARGET)
 	gcc $(SRC) -o $(TARGET)
 
 cross_compile: $(TARGET)
