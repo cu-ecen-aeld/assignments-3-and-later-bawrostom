@@ -1,25 +1,24 @@
-SRC := writer.c
+SRC = writer.c
 TARGET = writer
-OBJS := $(SRC:.c=.o)
 
 CROSS_COMPILE ?= native
 
+# CC variable is not needed here, as it's used explicitly in the rules
+
 all: $(TARGET)
 
-$(TARGET): $(OBJS)
 ifeq ($(CROSS_COMPILE), native)
-	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(TARGET) $(LDFLAGS)
+$(TARGET): $(SRC)
+	gcc $(SRC) -o $(TARGET)
 endif
 
 ifeq ($(CROSS_COMPILE), aarch64-none-linux-gnu-)
-	aarch64-none-linux-gnu-gcc -g -Wall -c -o $(OBJS) $(SRC)
-	aarch64-none-linux-gnu-gcc -g -Wall $(OBJS) -o $(TARGET) $(LDFLAGS)
+$(TARGET): $(SRC)
+	aarch64-none-linux-gnu-gcc $(SRC) -o $(TARGET)
 endif
 
-native: $(OBJS)
-ifeq ($(CROSS_COMPILE), native)
-	gcc -g -Wall $(OBJS) -o $(TARGET) $(LDFLAGS)
-endif
+native: $(TARGET)
+	gcc $(SRC) -o $(TARGET)
 
 clean:
-	-rm -f *.o $(TARGET)
+	rm -f $(TARGET)
