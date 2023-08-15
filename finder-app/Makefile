@@ -3,7 +3,6 @@ TARGET = writer
 
 CROSS_COMPILE ?= native
 
-# CC variable is not needed here, as it's used explicitly in the rules
 
 all: $(TARGET)
 
