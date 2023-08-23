@@ -10,9 +10,6 @@ WRITESTR=AELD_IS_FUN
 WRITEDIR=/tmp/aeld-data
 username=$(cat conf/username.txt)
 
-if [ -f  writer ];then
-	rm writer
-fi
 
 if [ $# -lt 3 ]
 then

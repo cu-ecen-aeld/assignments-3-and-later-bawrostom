@@ -57,10 +57,16 @@ fi
 mkdir ${OUTDIR}/rootfs
 cd ${OUTDIR}/rootfs
 # TODO: Create necessary base directories
-	mkdir -p bin etc home dev lib lib64 proc sys sbin tmp usr
-	mkdir -p usr/bin usr/lib usr/sbin
-	mkdir -p var/log
-	cd ../
+        mkdir -p bin etc home dev lib lib64 proc sys sbin tmp usr
+        mkdir -p usr/bin usr/lib usr/sbin
+        mkdir -p var/log
+        a=$(pwd)
+        cd  ~/embedded_linux/assignment-1-bawrostomc/finder-app/ 
+        cp finder.sh finder-test.sh writer  $a/home
+        cd $a
+        cp -r ~/embedded_linux/assignment-1-bawrostomc/conf .
+        cd ./home && ln -s ../conf conf
+        cd ../../
 
 if [ ! -d "${OUTDIR}/busybox" ]
 then
