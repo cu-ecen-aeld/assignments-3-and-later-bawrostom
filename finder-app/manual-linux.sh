@@ -61,10 +61,10 @@ cd ${OUTDIR}/rootfs
         mkdir -p usr/bin usr/lib usr/sbin
         mkdir -p var/log
         a=$(pwd)
-        cd  ~/embedded_linux/assignment-1-bawrostomc/finder-app/ 
+        cd  /home/rostom/embedded_linux/assignment-1-bawrostomc/finder-app/ 
         cp finder.sh finder-test.sh writer  $a/home
         cd $a
-        cp -r ~/embedded_linux/assignment-1-bawrostomc/conf .
+        cp -r /home/rostom/embedded_linux/assignment-1-bawrostomc/conf .
         cd ./home && ln -s ../conf conf
         cd ../../
 
