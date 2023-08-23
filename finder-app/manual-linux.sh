@@ -74,7 +74,7 @@ git clone git://busybox.net/busybox.git
     cd busybox
     git checkout ${BUSYBOX_VERSION}
     # TODO:  Configure busybox
-	make menuconfig
+#	make menuconfig
 else
     cd busybox
 fi
