@@ -92,20 +92,20 @@ cd ../rootfs/
 # TODO: Add library dependencies to rootfs
 if [ ! -e "lib/ld-linux-aarch64.so.1" ]
 then
-	cp /home/rostom/Downloads/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/libc/lib/ld-linux-aarch64.so.1 lib/
+	cp /tmp/libs/ld-linux-aarch64.so.1 lib/
 fi
 if [ ! -e "lib64/libc.o.6" ]
 then
-	cp /home/rostom/Downloads/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/libc/lib64/libc.so.6 lib64/ 
+	cp /tmp/libs/libc.so.6 lib64/ 
 fi
 if [ ! -e "lib64/libm.o.6" ]
 then
-	cp /home/rostom/Downloads/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/libc/lib64/libm.so.6 lib64/
+	cp /tmp/libs/libm.so.6 lib64/
 
 fi
 if [ ! -e "lib64/libresolv.o.6" ]
 then
-	cp /home/rostom/Downloads/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/libc/lib64/libresolv.so.2 lib64/
+	cp /tmp/libs/libresolv.so.2 lib64/
 fi
 # TODO: Make device nodes
 
