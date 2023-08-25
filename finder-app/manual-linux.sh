@@ -36,7 +36,7 @@ if [ ! -e ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ]; then
 
     # TODO: Add your kernel build steps here
 	#applying the git patch
-#	git apply ~/Downloads/dtc-multiple-definition.patch 
+	git apply ~/Downloads/dtc-multiple-definition.patch 
 	#cleaning
 	make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} mrproper
 	#defconfig
@@ -85,41 +85,40 @@ fi
 	make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} 
 	make CONFIG_PREFIX=../rootfs ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE}  install 
 cd ../rootfs
+
 echo "Library dependencies"
 ${CROSS_COMPILE}readelf -a bin/busybox | grep "program interpreter"
 ${CROSS_COMPILE}readelf -a bin/busybox | grep "Shared library"
-cd ../rootfs/
-# TODO: Add library dependencies to rootfs
-if [ ! -e "lib/ld-linux-aarch64.so.1" ]
-then
-	cp /tmp/libs/ld-linux-aarch64.so.1 lib/
-fi
-if [ ! -e "lib64/libc.o.6" ]
-then
-	cp /tmp/libs/libc.so.6 lib64/ 
-fi
-if [ ! -e "lib64/libm.o.6" ]
-then
-	cp /tmp/libs/libm.so.6 lib64/
 
-fi
-if [ ! -e "lib64/libresolv.o.6" ]
-then
-	cp /tmp/libs/libresolv.so.2 lib64/
-fi
+# TODO: Add library dependencies to rootfs
+sys_root=$( ${CROSS_COMPILE}gcc -print-sysroot )
+prg_int=$( find ${sys_root} -name ld-linux-aarch64.so.1 )
+libm=$( find ${sys_root} -name libm.so.6 )
+libr=$( find ${sys_root} -name libresolv.so.2 )
+libc=$( find ${sys_root} -name libc.so.6 )
+
+cp ${prg_int} ${OUTDIR}/rootfs/lib
+cp $libm ${OUTDIR}/rootfs/lib64
+cp $libr ${OUTDIR}/rootfs/lib64
+cp $libc ${OUTDIR}/rootfs/lib64
+
+
 # TODO: Make device nodes
 
 	sudo mknod -m 666 dev/null c 1 3
 	sudo mknod -m 666 dev/console c 5 1
 
 # TODO: Clean and build the writer utility
-
-cd ~/embedded_linux/assignment-1-bawrostomc/finder-app
+cd ${FINDER_APP_DIR}
 make clean
 make CROSS_COMPILE=aarch64-none-linux-gnu-
+cd ${OUTDIR}
 # TODO: Copy the finder related scripts and executables to the /home directory
-cp writer finder.sh finder-test.sh ${OUTDIR}/rootfs/home
-cd ${OUTDIR}/rootfs
+cp ${FINDER_APP_DIR}/writer ${FINDER_APP_DIR}/finder.sh ${FINDER_APP_DIR}/finder-test.sh ${OUTDIR}/rootfs/home
+cp -r ${FINDER_APP_DIR}/conf ${OUTDIR}/rootfs
+cd ${OUTDIR}/rootfs/home 
+ln -s ../conf conf
+cd ../
 # on the target rootfs
 
 # TODO: Chown the root directory
