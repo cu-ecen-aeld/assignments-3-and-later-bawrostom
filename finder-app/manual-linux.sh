@@ -36,7 +36,7 @@ if [ ! -e ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ]; then
 
     # TODO: Add your kernel build steps here
 	#applying the git patch
-	git apply ~/Downloads/dtc-multiple-definition.patch 
+#	git apply ~/Downloads/dtc-multiple-definition.patch 
 	#cleaning
 	make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} mrproper
 	#defconfig
