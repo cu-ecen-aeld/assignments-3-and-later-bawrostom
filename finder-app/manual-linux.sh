@@ -60,12 +60,6 @@ cd ${OUTDIR}/rootfs
         mkdir -p bin etc home dev lib lib64 proc sys sbin tmp usr
         mkdir -p usr/bin usr/lib usr/sbin
         mkdir -p var/log
-        #a=$(pwd)
-        #cd  /home/rostom/embedded_linux/assignment-1-bawrostomc/finder-app/ 
-        #cp finder.sh finder-test.sh writer  $a/home
-        #cd $a
-        #cp -r /home/rostom/embedded_linux/assignment-1-bawrostomc/conf .
-        #cd ./home && ln -s ../conf conf
         cd ../
 
 if [ ! -d "${OUTDIR}/busybox" ]
@@ -114,8 +108,8 @@ make clean
 make CROSS_COMPILE=aarch64-none-linux-gnu-
 cd ${OUTDIR}
 # TODO: Copy the finder related scripts and executables to the /home directory
-cp ${FINDER_APP_DIR}/writer ${FINDER_APP_DIR}/finder.sh ${FINDER_APP_DIR}/finder-test.sh ${OUTDIR}/rootfs/home
-cp -r ${FINDER_APP_DIR}/conf ${OUTDIR}/rootfs
+cp ${FINDER_APP_DIR}/autorun-qemu.sh ${FINDER_APP_DIR}/writer ${FINDER_APP_DIR}/finder.sh ${FINDER_APP_DIR}/finder-test.sh ${OUTDIR}/rootfs/home
+cp -r $(dirname ${FINDER_APP_DIR})/conf ${OUTDIR}/rootfs
 cd ${OUTDIR}/rootfs/home 
 ln -s ../conf conf
 cd ../
